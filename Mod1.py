@@ -10,7 +10,7 @@ def errorNumber():
 def guessing():
     randomInteger = randint(1, 100)
     while True:
-        guess = int(input("Podaj liczbę: "))
+        guess = int(input("Podaj liczbę od 1 do 100: "))
         if guess >= 1 and guess <= 100:
             if guess < randomInteger:
                 print("za mała liczba")
@@ -37,24 +37,28 @@ def frame (string):
     verPiece = chr(9553) # vertical piece
     print(tlCorner + len(string) * horPiece + trCorner)
     print(verPiece + string + verPiece)
-    print(blCorner + len(string) * horPiece + brCorner + "\n")
+    print(blCorner + len(string) * horPiece + brCorner)
 
-print(20 * chr(9552))
-print("1) Rozpocznij grę")
-print("2) Pokaż wyniki")
-print("3) Zamknij grę")
-print(20 * chr(9552))
+print(chr(9556) + 20 * chr(9552) + chr(9559))
+print(chr(9553) + "1) Rozpocznij grę" + (20 - len("1) Rozpocznij grę")) * ' ' + chr(9553))
+print(chr(9553) + "2) Pokaż wyniki" + (20 - len("2) Pokaż wyniki")) * ' ' + chr(9553))
+print(chr(9553) + "3) Zamknij grę" + (20 - len("3) Zamknij grę")) * ' ' + chr(9553))
+print(chr(9562) + 20 * chr(9552) + chr(9565))
 
 while True:
     menu = input("\nWybierz w menu: ")
     if menu == "1":
-        print("Startujemy")
-        dotsAnimation(3, 0.1)
         frame("Zgadywanie")
+        dotsAnimation(3, 0.1)
+        print("\nStartujemy")
         timeStart = time.perf_counter()
         if not guessing():
             timeStop = time.perf_counter()
-        score = 100000 - round(1000 * timeStop - timeStart)
+        timeDifference = round(1000 * timeStop - timeStart)
+        if timeDifference <= 1000000:
+            score = 1000000 - timeDifference
+        else:
+            score = 1
         print("Wynik: " + str(score) + "\n")
         while True:
             playerName = input("Podaj nazwę gracza: ")
@@ -71,6 +75,7 @@ while True:
 
     elif menu == "2":
         frame("Wyniki")
+        dotsAnimation(3, 0.2)
         #wyniki wczytane z pliku
         break
 
