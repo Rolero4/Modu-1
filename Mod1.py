@@ -9,7 +9,7 @@ def errorNumber():
 
 def guessing():
     timeStart = time.perf_counter()
-    randomInteger = randint(1, 10)
+    randomInteger = randint(1, 100)
     number = 1
     while True:
         guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
