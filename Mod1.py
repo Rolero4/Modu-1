@@ -12,19 +12,22 @@ def guessing():
     randomInteger = randint(1, 100)
     number = 1
     while True:
-        guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
-        if guess >= 1 and guess <= 100:
-            if guess < randomInteger:
-                print("za mała liczba")
-            elif guess > randomInteger:
-                print("za duża liczba")
-            elif guess == randomInteger:
-                print("brawo, mój przyjacielu\n")
-                timeStop = time.perf_counter()
-                timeDifference = round(1000 * (timeStop - timeStart))
-                return timeDifference
-            number += 1
-        else:
+        try:
+            guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
+            if guess >= 1 and guess <= 100:
+                if guess < randomInteger:
+                    print("za mała liczba")
+                elif guess > randomInteger:
+                    print("za duża liczba")
+                elif guess == randomInteger:
+                    print("brawo, mój przyjacielu\n")
+                    timeStop = time.perf_counter()
+                    timeDifference = round(1000 * (timeStop - timeStart))
+                    return timeDifference
+                number += 1
+            else:
+                errorNumber()
+        except ValueError:
             errorNumber()
 
 def dotsAnimation(number, delay): # printing (number) dots every (delay) seconds
