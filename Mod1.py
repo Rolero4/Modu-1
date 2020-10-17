@@ -14,6 +14,10 @@ def guessing():
     while True:
         try:
             guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
+            
+        except ValueError:
+            errorNumber()
+        else:
             if guess >= 1 and guess <= 100:
                 if guess < randomInteger:
                     print("za mała liczba")
@@ -27,8 +31,6 @@ def guessing():
                 number += 1
             else:
                 errorNumber()
-        except ValueError:
-            errorNumber()
 
 def dotsAnimation(number, delay): # printing (number) dots every (delay) seconds
     for i in range(number):
