@@ -70,10 +70,10 @@ while True:
             if ',' in playerName:
                 print("Błędna nazwa gracza.")
             else:
-                fWyniki = open("wyniki.txt", "a")
-                if fWyniki:
-                    fWyniki.write(playerName + ", " + str(score) + "\n")
-                    fWyniki.close()
+                fresults = open("results.txt", "a")
+                if fresults:
+                    fresults.write(playerName + ", " + str(score) + "\n")
+                    fresults.close()
                 else:
                     print("Błąd otwarcia pliku.")
                 break
@@ -81,7 +81,7 @@ while True:
     elif menu == "2":
         frame("Wyniki")
         dotsAnimation(3, 0.2)
-        scoreboard.scores('wyniki.txt') #wyniki wczytane z pliku
+        scoreboard.scores('wyniki.txt')
 
     elif menu == "3":
         frame("Dziękujemy za grę :)")
