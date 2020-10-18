@@ -3,6 +3,7 @@ from random import randint
 import time
 import sys
 import os
+import scoreboard
 
 def errorNumber():
     print("Błąd. Podaj poprawną liczbę.")
@@ -12,25 +13,20 @@ def guessing():
     randomInteger = randint(1, 100)
     number = 1
     while True:
-        try:
-            guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
-            
-        except ValueError:
-            errorNumber()
+        guess = int(input(str(number) + ". Podaj liczbę od 1 do 100: "))
+        if guess >= 1 and guess <= 100:
+            if guess < randomInteger:
+                print("\t\tza mała liczba\n")
+            elif guess > randomInteger:
+                print("\t\tza duża liczba\n")
+            elif guess == randomInteger:
+                print("\t\tbrawo, mój przyjacielu\n")
+                timeStop = time.perf_counter()
+                timeDifference = round(1000 * (timeStop - timeStart))
+                return timeDifference
+            number += 1
         else:
-            if guess >= 1 and guess <= 100:
-                if guess < randomInteger:
-                    print("za mała liczba")
-                elif guess > randomInteger:
-                    print("za duża liczba")
-                elif guess == randomInteger:
-                    print("brawo, mój przyjacielu\n")
-                    timeStop = time.perf_counter()
-                    timeDifference = round(1000 * (timeStop - timeStart))
-                    return timeDifference
-                number += 1
-            else:
-                errorNumber()
+            errorNumber()
 
 def dotsAnimation(number, delay): # printing (number) dots every (delay) seconds
     for i in range(number):
@@ -49,13 +45,15 @@ def frame (string):
     print(verPiece + string + verPiece)
     print(blCorner + len(string) * horPiece + brCorner)
 
-print(chr(9556) + 20 * chr(9552) + chr(9559))
-print(chr(9553) + "1) Rozpocznij grę" + (20 - len("1) Rozpocznij grę")) * ' ' + chr(9553))
-print(chr(9553) + "2) Pokaż wyniki" + (20 - len("2) Pokaż wyniki")) * ' ' + chr(9553))
-print(chr(9553) + "3) Zamknij grę" + (20 - len("3) Zamknij grę")) * ' ' + chr(9553))
-print(chr(9562) + 20 * chr(9552) + chr(9565))
+def show_menu():
+    print(chr(9556) + 20 * chr(9552) + chr(9559))
+    print(chr(9553) + "1) Rozpocznij grę" + (20 - len("1) Rozpocznij grę")) * ' ' + chr(9553))
+    print(chr(9553) + "2) Pokaż wyniki" + (20 - len("2) Pokaż wyniki")) * ' ' + chr(9553))
+    print(chr(9553) + "3) Zamknij grę" + (20 - len("3) Zamknij grę")) * ' ' + chr(9553))
+    print(chr(9562) + 20 * chr(9552) + chr(9565))
 
 while True:
+    show_menu()
     menu = input("\nWybierz w menu: ")
     if menu == "1":
         frame("Zgadywanie")
@@ -83,8 +81,7 @@ while True:
     elif menu == "2":
         frame("Wyniki")
         dotsAnimation(3, 0.2)
-        #wyniki wczytane z pliku
-        break
+        scoreboard.scores('wyniki.txt') #wyniki wczytane z pliku
 
     elif menu == "3":
         frame("Dziękujemy za grę :)")
