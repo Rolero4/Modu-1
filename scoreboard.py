@@ -1,35 +1,34 @@
 def scores(filename):
-    """Wyświetlenie aktualnej tablicy najlepszych wyników."""
     try:
         with open(filename) as f_obj:
             players = f_obj.readlines()
     except FileNotFoundError:
-        msg = "Przepraszamy, ale plik '" + filename + "' nie istnieje."
+        print("Przepraszamy, ale plik '" + filename + "' nie istnieje.")
     else:
-        wyniki = []
+        results = []
         for player in players:
             i = 0
             while i < (len(player)-1):
                 if player[i] == ' ':
                     i += 1
-                    wyniki.append(player[i:len(player)])
+                    results.append(player[i:len(player)])
                 i += 1
         i = 0
-        l = len(wyniki)
+        l = len(results)
         while i < l-1:
             j=0
             while j < l-1:
-                if wyniki[j] < wyniki[j+1]:
-                    pomoc_1 = wyniki[j+1]
-                    pomoc_2 = players[j+1]
-                    wyniki[j+1] = wyniki[j]
+                if results[j] < results[j+1]:
+                    tempResults = results[j+1]
+                    tempPlayers = players[j+1]
+                    results[j+1] = results[j]
                     players[j+1] = players[j]
-                    wyniki[j] = pomoc_1
-                    players[j] = pomoc_2
+                    results[j] = tempResults
+                    players[j] = tempPlayers
                 j += 1
             i += 1           
         if players:
-            print("Scoreboard: ")
+            print("Scoreboard:\n")
             i = 1
             l = len(players)
             while i < l:
@@ -37,6 +36,3 @@ def scores(filename):
                 if i == 10:
                     break
                 i += 1
-#scoreboard('wyniki.txt')
-                
-
