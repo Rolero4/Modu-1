@@ -1,9 +1,5 @@
-KeimiLL, 968146
-Rolero4, 985020
-DominLL, 978768
-Kubulonimbus, 979992
 Piotr, 987521
-Rafał, 920000
+Rafal, 920000
 Anna, 976922
 Arek, 983623
 Marcin, 984672
@@ -11,3 +7,7 @@ Adrian, 912032
 Tomek, 932032
 Joasia, 993077
 Witek, 983739
+Jarek, 125856
+Zdzisiek, 326457
+Beata, 999999
+Aga, 798634
