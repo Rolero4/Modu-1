@@ -23,6 +23,10 @@ def guessing():
                 print("\t\tbrawo, mój przyjacielu\n")
                 timeStop = time.perf_counter()
                 timeDifference = round(1000 * (timeStop - timeStart))
+                if timeDifference <= 1000000:
+                    return 1000000 - timeDifference
+                else:
+                    return 1
                 return timeDifference
             number += 1
         else:
@@ -59,18 +63,14 @@ while True:
         frame("Zgadywanie")
         dotsAnimation(3, 0.1)
         print("\nStartujemy")
-        temp = guessing()
-        if temp <= 1000000:
-            score = 1000000 - temp
-        else:
-            score = 1
+        score = guessing()
         print("Wynik: " + str(score) + "\n")
         while True:
             playerName = input("Podaj nazwę gracza: ")
-            if ',' in playerName:
+            if ' ' in playerName:
                 print("Błędna nazwa gracza.")
             else:
-                fresults = open("results.txt", "a")
+                fresults = open("wyniki.txt", "a")
                 if fresults:
                     fresults.write(playerName + ", " + str(score) + "\n")
                     fresults.close()
